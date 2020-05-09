@@ -25,13 +25,15 @@ bool existsUncoloredPick(vector<int>&picks);
 
 bool hasAdjacentPick(int pick, vector<Rib> &structRibs, vector<int> &colors, int color);
 
+void printColors(vector<int>colors);
+
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     vector<Rib> ribsList;
     int n = 0, m = 0;
     initializeGraph(n,m,ribsList);
     sortRibs(n,m,ribsList);
-    colorize(n,m,ribsList);
+    printColors(colorize(n,m,ribsList));
     return 0;
 }
 
@@ -108,6 +110,7 @@ vector<int> colorize(int &picks, int &ribs, vector<Rib> &structRibs) {
         }
 
     }
+    pickColors.push_back(color);
     return pickColors;
 }
 
@@ -126,4 +129,11 @@ bool existsUncoloredPick(vector<int>&picks){
         if(picks[i]==0)return true;
     }
     return false;
+}
+
+void printColors(vector<int>colors){
+    cout<< "Для розфарбування графа достатньо "<<colors[colors.size()-1]<<" кольорів\n";
+    for(int i=0; i<colors.size()-1; i++){
+        cout<< "колір вершини "<<i+1<< "  "<<colors[i]<<endl;
+    }
 }
